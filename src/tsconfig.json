@@ -1,0 +1,28 @@
+{
+    "include": [ "**/*.ts" ],
+    "exclude": [
+        "**/*.d.ts",
+        "**/*-spec.ts"
+    ],
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "es5",
+        "lib": [ "es2015" ],
+        "sourceRoot": "./",
+        "outDir": "../../bin",
+        "declaration": true,
+        "declarationDir": "../../bin",
+        "module": "commonjs",
+        "types": [ "node" ],
+        "sourceMap": true,
+        "alwaysStrict": true,
+        "strict": true,
+        "noEmitOnError": false,
+        "noImplicitThis": true,
+        "noUnusedParameters": true,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUnusedLocals": true
+    }
+}

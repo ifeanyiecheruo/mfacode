@@ -1,0 +1,58 @@
+{
+  "name": "mfacode",
+  "version": "1.0.0",
+  "description": "Authentication code generator",
+  "author": "Ifeanyi Echeruo (https://ifeanyi.echeruo.net)",
+  "license": "MIT",
+  "keywords": [
+    "rfc",
+    "6238",
+    "otp",
+    "totp",
+    "one time password",
+    "authenticator"
+  ],
+  "repository": "github:ifeanyiecheruo/mfacode",
+  "bugs": {
+    "url": "https://github.com/ifeanyiecheruo/mfacode/issues"
+  },
+  "bin": {
+    "mfacode": "bin/index.js"
+  },
+  "directories": {
+    "bin": "bin",
+    "lib": "lib",
+    "doc": "doc",
+    "src": "src"
+  },
+  "files": [
+    "README.md",
+    "bin/**/*.js",
+    "lib/**/*.*",
+    "doc/**/*.*",
+    "src/**/*.ts",
+    "src/**/*.json"
+  ],
+  "scripts": {
+    "prepare": "webpack --config src/webpack.config.js --optimize-minimize"
+  },
+  "dependencies": {
+    "node-otp": "^1.2.0",
+    "xkeychain": "^0.0.6"
+  },
+  "devDependencies": {
+    "@types/expect": "^1.20.2",
+    "@types/mocha": "^2.2.46",
+    "@types/node": "^9.3.0",
+    "@types/webpack": "^3.8.2",
+    "expect": "^22.0.6",
+    "mocha": "^4.1.0",
+    "name-all-modules-plugin": "^1.0.1",
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.6.2",
+    "webpack": "^3.10.0",
+    "webpack-cli": "^2.0.2",
+    "webpack-node-externals": "^1.6.0",
+    "webpack-permissions-plugin": "^0.0.2"
+  }
+}
