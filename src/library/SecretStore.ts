@@ -26,7 +26,6 @@ class SecretStoreImpl implements SecretStore {
                 if (typeof err !== "undefined" && err !== null) {
                     reject(err);
                 } else {
-                    console.log("got secret: " + data);
                     resolve(data);
                 }
             });

@@ -34,7 +34,7 @@ function create(): AppContext {
 async function exec(cmd: Command, app: AppContext): Promise<boolean> {
     switch(cmd.name) {
         case "get": {
-            console.log(await app.getCode(cmd.accountName));
+            console.log(await app.getCode(cmd.accountName, { clockSkew: cmd.clockSkew }));
             return true;
         }
 
@@ -64,5 +64,5 @@ async function exec(cmd: Command, app: AppContext): Promise<boolean> {
 
 function help(): void {
     const commandName = basename(process.argv[1] || process.argv0);
-    console.log(commandName + " [get <accountName>] | [add <accountName> <secret>] | [rm <accountName>] | ls | help]")
+    console.log(commandName + " [get <accountName> [clockSkew] | [add <accountName> <secret>] | [rm <accountName>] | ls | help]")
 }

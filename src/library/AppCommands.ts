@@ -3,6 +3,7 @@
 export type Command = {
     name: "get";
     accountName: string;
+    clockSkew: number;
 } | {
     name: "add";
     accountName: string;
@@ -21,6 +22,7 @@ export default {
 }
 
 interface MyIterator<T> {
+    peek(): T | undefined;
     next(): boolean;
     value(): T;
 }
@@ -33,10 +35,12 @@ function parse(argv: string[]): Command {
     switch(name) {
         case "get": {
             const accountName = getAccountNameArg(args);
+            const clockSkew = getOptionalClockSkew(args);
 
             return {
                 name: "get",
-                accountName
+                accountName,
+                clockSkew
             };
         }
 
@@ -83,6 +87,16 @@ class ArrayIterator<T> implements MyIterator<T> {
         this._index = -1;
     }
 
+    public peek(): T | undefined {
+        const nextIndex = (this._index < 0) ? 0 : (this._index + 1);
+
+        if (nextIndex < this._value.length) {
+            return this._value[nextIndex];
+        }
+
+        return;
+    }
+
     public next(): boolean {
         const nextIndex = this._index + 1;
 
@@ -113,6 +127,21 @@ function getAccountNameArg(iterator: MyIterator<string>): string {
 
     const result = iterator.value();
     checkValidAccountName(result);
+
+    return result;
+}
+
+function getOptionalClockSkew(iterator: MyIterator<string>): number {
+    let result = 0;
+    const arg = iterator.peek();
+
+    if (typeof arg === "string") {
+        try {
+            result = parseInt(arg, 10);
+            iterator.next();
+        } catch {            
+        }
+    }
 
     return result;
 }
