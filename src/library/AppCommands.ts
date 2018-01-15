@@ -133,11 +133,11 @@ function getOptionalClockSkew(iterator: MyIterator<string>): number {
     const arg = iterator.peek();
 
     if (typeof arg === "string") {
-        try {
-            result = parseInt(arg, 10);
-            iterator.next();
-        } catch {            
+        result = parseInt(arg, 10);
+        if (isNaN(result)) {
+            throw new Error(`Number of seconds expected. Got '${arg}'`);
         }
+        iterator.next();
     }
 
     return result;
