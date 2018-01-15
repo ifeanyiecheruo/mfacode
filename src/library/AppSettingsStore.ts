@@ -9,6 +9,7 @@ export interface StringMap<V> {
 
 export interface AccountSettings {
     secret: string;
+    clockSkew: number;
 }
 
 export interface AppSettingsStore {

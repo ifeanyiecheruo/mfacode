@@ -3,16 +3,12 @@
 import { AppSettingsStore, StringMap, AccountSettings } from "./AppSettingsStore";
 const OTP = require("otp");
 
-export interface GetCodeOptions {
-    clockSkew: number
-}
-
 export default class AppContext {
     constructor(store: AppSettingsStore) {
         this._store = store;
     }
 
-    public async getCode(accountName: string, options: GetCodeOptions): Promise<string> {
+    public async getCode(accountName: string): Promise<string> {
         const account = await this._store.get(accountName);
 
         if (typeof account === "undefined") {
@@ -23,15 +19,16 @@ export default class AppContext {
             account.secret, 
             {
                 timeSlice: 30,
-                epoch: -options.clockSkew,
+                epoch: -(account.clockSkew || 0),
                 codeLength: 6
             }
         ).totp();
     }
     
-    public addAccount(accountName: string, secret: string): Promise<void> {
+    public addAccount(accountName: string, secret: string, clockSkew: number): Promise<void> {
         return this._store.set(accountName, {
-            secret: secret
+            secret: secret,
+            clockSkew: clockSkew || 0
         });
     }
     

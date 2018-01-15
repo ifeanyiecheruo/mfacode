@@ -3,11 +3,11 @@
 export type Command = {
     name: "get";
     accountName: string;
-    clockSkew: number;
 } | {
     name: "add";
     accountName: string;
     secret: string;
+    clockSkew: number;
 } | {
     name: "remove";
     accountName: string;
@@ -35,23 +35,23 @@ function parse(argv: string[]): Command {
     switch(name) {
         case "get": {
             const accountName = getAccountNameArg(args);
-            const clockSkew = getOptionalClockSkew(args);
 
             return {
                 name: "get",
-                accountName,
-                clockSkew
+                accountName
             };
         }
 
         case "add": {
             const accountName = getAccountNameArg(args);
             const secret = getSecretArg(args);
+            const clockSkew = getOptionalClockSkew(args);
 
             return {
                 name: "add",
                 accountName,
-                secret
+                secret,
+                clockSkew
             };
         }
 
