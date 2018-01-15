@@ -12,7 +12,7 @@ export default class AppContext {
         const account = await this._store.get(accountName);
 
         if (typeof account === "undefined") {
-            throw new Error("Account not found : " + accountName);
+            throw new Error(`Account not found : ${accountName}`);
         }
 
         return OTP.parse(

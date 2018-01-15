@@ -6,7 +6,6 @@ export type Command = {
 } | {
     name: "add";
     accountName: string;
-    secret: string;
     clockSkew: number;
 } | {
     name: "remove";
@@ -44,13 +43,11 @@ function parse(argv: string[]): Command {
 
         case "add": {
             const accountName = getAccountNameArg(args);
-            const secret = getSecretArg(args);
             const clockSkew = getOptionalClockSkew(args);
 
             return {
                 name: "add",
                 accountName,
-                secret,
                 clockSkew
             };
         }
@@ -141,19 +138,6 @@ function getOptionalClockSkew(iterator: MyIterator<string>): number {
             iterator.next();
         } catch {            
         }
-    }
-
-    return result;
-}
-
-function getSecretArg(iterator: MyIterator<string>): string {
-    if (!iterator.next()) {
-        throw new Error("Missing secret");
-    }
-
-    const result = iterator.value();
-    if (result.trim().length < 1) {
-        throw new Error("Missing secret");
     }
 
     return result;

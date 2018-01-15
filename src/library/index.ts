@@ -7,6 +7,8 @@ import AppContext from "./AppContext";
 import appCommands, { Command } from "./AppCommands";
 import { homedir } from "os";
 import { join, basename } from "path";
+import process = require("process");
+import readline = require("readline");
 
 export default {
     run,
@@ -39,7 +41,22 @@ async function exec(cmd: Command, app: AppContext): Promise<boolean> {
         }
 
         case "add": {
-            await app.addAccount(cmd.accountName, cmd.secret, cmd.clockSkew);
+            const reader = readline.createInterface({
+                input: process.stdin,
+                output: process.stdout,
+                historySize: 0,
+            });
+
+            reader.setPrompt("Enter secret: ");
+            reader.prompt();
+            const secret = await new Promise<string>((resolve) => {
+                reader.on("line", resolve);
+            });
+
+            reader.close();
+
+            await app.addAccount(cmd.accountName, secret, cmd.clockSkew);
+
             return true;
         }
 
@@ -64,5 +81,5 @@ async function exec(cmd: Command, app: AppContext): Promise<boolean> {
 
 function help(): void {
     const commandName = basename(process.argv[1] || process.argv0);
-    console.log(commandName + " [get <accountName> | [add <accountName> <secret> [clockSkew]] | [rm <accountName>] | ls | help]")
+    console.log(`${commandName} [get <accountName> | [add <accountName> <secret> [clockSkew]] | [rm <accountName>] | ls | help]`)
 }
