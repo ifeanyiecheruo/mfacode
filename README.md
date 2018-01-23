@@ -3,6 +3,11 @@ MFACODE
 
 Authentication code generator for multi factor Authentication
 
+Installing
+----------
+
+`npm install mfacode`
+
 Usage
 ------
 
