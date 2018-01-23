@@ -99,5 +99,5 @@ class AppSettingsStoreImpl implements AppSettingsStore {
 }
 
 enum Constants {
-    defaultAppSettingsJSON = "{ accounts: {} }"
+    defaultAppSettingsJSON = "{\"accounts\":{}}"
 }
