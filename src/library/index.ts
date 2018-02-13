@@ -81,5 +81,5 @@ async function exec(cmd: Command, app: AppContext): Promise<boolean> {
 
 function help(): void {
     const commandName = basename(process.argv[1] || process.argv0);
-    console.log(`${commandName} [get <accountName> | [add <accountName> <secret> [clockSkew]] | [rm <accountName>] | ls | help]`)
+    console.log(`${commandName} [get <accountName> | [add <accountName> [clockSkew]] | [rm <accountName>] | ls | help]`)
 }
