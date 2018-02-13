@@ -6,7 +6,7 @@ Authentication code generator for multi factor Authentication
 Installing
 ----------
 
-`npm install mfacode`
+`npm install -g mfacode`
 
 Usage
 ------
