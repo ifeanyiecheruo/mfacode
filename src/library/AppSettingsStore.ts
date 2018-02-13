@@ -95,7 +95,7 @@ class AppSettingsStoreImpl implements AppSettingsStore {
 
     private _blobStore: BlobStore;
     private _secretStore: SecretStore;
-    private _cache: AppSettings;
+    private _cache: undefined | AppSettings;
 }
 
 enum Constants {
